@@ -1,11 +1,12 @@
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./styles/global";
 import defaultTheme from "./styles/themes/default";
+import Header from "./components/Header";
 
 function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
-      <p>You'll never walk alone.</p>
+      <Header />
       <GlobalStyle />
     </ThemeProvider>
   );
