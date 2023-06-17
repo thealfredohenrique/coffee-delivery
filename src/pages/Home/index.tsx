@@ -1,5 +1,7 @@
+import Intro from "./components/Intro";
+
 function Home() {
-  return <h1>Hello Home</h1>;
+  return <Intro />;
 }
 
 export default Home;
