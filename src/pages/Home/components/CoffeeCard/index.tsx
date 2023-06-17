@@ -14,24 +14,29 @@ import {
   CounterButtonContainer,
 } from "./styles";
 
-function CoffeeCard() {
+interface CoffeeCardProps {
+  image: string;
+  tags: string[];
+  name: string;
+  description: string;
+  price: number;
+}
+
+function CoffeeCard({ image, tags, name, description }: CoffeeCardProps) {
   return (
     <CoffeeCardContainer>
       <CoffeeFigureContainer>
-        <CoffeeImageContainer
-          src="/src/assets/traditional-espresso-coffee.png"
-          alt="Café Expresso Tradicional"
-        />
+        <CoffeeImageContainer src={`/src/assets/${image}`} alt={name} />
 
         <CoffeeTagsContainer>
-          <CoffeeTagContainer>Tradicional</CoffeeTagContainer>
+          {tags.map((tag) => (
+            <CoffeeTagContainer key={tag}>{tag}</CoffeeTagContainer>
+          ))}
         </CoffeeTagsContainer>
       </CoffeeFigureContainer>
 
-      <CoffeeTitleContainer>Expresso Tradicional</CoffeeTitleContainer>
-      <CoffeeDescriptionContainer>
-        O tradicional café feito com água quente e grãos moídos
-      </CoffeeDescriptionContainer>
+      <CoffeeTitleContainer>{name}</CoffeeTitleContainer>
+      <CoffeeDescriptionContainer>{description}</CoffeeDescriptionContainer>
 
       <BuyCoffeeContainer>
         <CoffeePriceContainer>

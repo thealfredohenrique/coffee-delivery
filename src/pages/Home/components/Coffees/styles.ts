@@ -15,5 +15,8 @@ export const SectionTitleContainer = styled.h2`
 `;
 
 export const CoffeesListContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
   padding: 2rem 0;
 `;
