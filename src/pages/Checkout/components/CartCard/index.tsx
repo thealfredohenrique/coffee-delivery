@@ -1,4 +1,5 @@
 import {
+  CartButtonContainer,
   CartCardContainer,
   CartItemsContainer,
   CartTotalsContainer,
@@ -30,6 +31,8 @@ function CartCard() {
           <strong>R$ 33,20</strong>
         </CartTotalsItemContainer>
       </CartTotalsContainer>
+
+      <CartButtonContainer>Confirmar pedido</CartButtonContainer>
     </CartCardContainer>
   );
 }

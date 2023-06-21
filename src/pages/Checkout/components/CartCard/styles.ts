@@ -43,3 +43,24 @@ export const CartTotalsItemContainer = styled.div`
     line-height: 130%;
   }
 `;
+
+export const CartButtonContainer = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.75rem 0.5rem;
+  background: ${(props) => props.theme.yellow};
+  color: ${(props) => props.theme.white};
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 160%;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &:hover {
+    background: ${(props) => props.theme.yellowDark};
+  }
+`;
