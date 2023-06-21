@@ -8,14 +8,18 @@ export const CheckoutContainer = styled.div`
   padding: 2.5rem 0;
 `;
 
-export const LeftContainer = styled.div`
+const SideWrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 `;
 
-export const RightContainer = styled.div`
+export const LeftContainer = styled(SideWrapper)`
+  flex: 1;
+`;
+
+export const RightContainer = styled(SideWrapper)`
   width: 28rem;
 `;
 
@@ -35,13 +39,13 @@ export const CardContainer = styled.form`
   border-radius: 6px;
 `;
 
-const ICON_COLORS = {
-  "dark-yellow": "yellowDark",
+const LEGEND_ICON_COLORS = {
   purple: "purple",
+  yellow: "yellowDark",
 };
 
 interface LegendContainerProps {
-  color: keyof typeof ICON_COLORS;
+  color: keyof typeof LEGEND_ICON_COLORS;
 }
 
 export const LegendContainer = styled.legend<LegendContainerProps>`
@@ -49,7 +53,7 @@ export const LegendContainer = styled.legend<LegendContainerProps>`
   gap: 0.5rem;
 
   svg {
-    color: ${(props) => props.theme[ICON_COLORS[props.color]]};
+    color: ${(props) => props.theme[LEGEND_ICON_COLORS[props.color]]};
   }
 `;
 

@@ -9,7 +9,7 @@ import { FieldContainer, FieldsetContainer } from "./styles";
 function AddressCard() {
   return (
     <CardContainer>
-      <LegendContainer color="dark-yellow">
+      <LegendContainer color="yellow">
         <MapPinLine size={22} />
 
         <LegendTextContainer>

@@ -1,4 +1,5 @@
 import AddressCard from "./components/AddressCard";
+import CartCard from "./components/CartCard";
 import PaymentCard from "./components/PaymentCard";
 import {
   CheckoutContainer,
@@ -19,6 +20,8 @@ function Checkout() {
 
       <RightContainer>
         <TitleContainer>Cafés selecionados</TitleContainer>
+
+        <CartCard />
       </RightContainer>
     </CheckoutContainer>
   );
