@@ -1,16 +1,15 @@
 import { MapPinLine } from "@phosphor-icons/react";
 import {
-  AddressCardContainer,
-  FieldContainer,
-  FieldsetContainer,
+  CardContainer,
   LegendContainer,
   LegendTextContainer,
-} from "./styles";
+} from "../../styles";
+import { FieldContainer, FieldsetContainer } from "./styles";
 
 function AddressCard() {
   return (
-    <AddressCardContainer>
-      <LegendContainer>
+    <CardContainer>
+      <LegendContainer color="dark-yellow">
         <MapPinLine size={22} />
 
         <LegendTextContainer>
@@ -47,7 +46,7 @@ function AddressCard() {
         <FieldContainer type="text" name="city" placeholder="Cidade" required />
         <FieldContainer type="text" name="state" placeholder="UF" required />
       </FieldsetContainer>
-    </AddressCardContainer>
+    </CardContainer>
   );
 }
 

@@ -1,38 +1,5 @@
 import { styled } from "styled-components";
 
-export const AddressCardContainer = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  padding: 2.5rem;
-  background-color: ${(props) => props.theme.baseCard};
-  border-radius: 6px;
-`;
-
-export const LegendContainer = styled.legend`
-  display: flex;
-  gap: 0.5rem;
-
-  svg {
-    color: ${(props) => props.theme.yellowDark};
-  }
-`;
-
-export const LegendTextContainer = styled.div`
-  line-height: 1.3;
-
-  h2 {
-    color: ${(props) => props.theme.baseSubtitle};
-    font-size: 1rem;
-    font-weight: 400;
-  }
-
-  p {
-    color: ${(props) => props.theme.baseText};
-    font-size: 0.875rem;
-  }
-`;
-
 export const FieldsetContainer = styled.fieldset`
   display: grid;
   grid-template-rows: repeat(4, 1fr);

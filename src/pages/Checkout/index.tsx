@@ -1,4 +1,5 @@
 import AddressCard from "./components/AddressCard";
+import PaymentCard from "./components/PaymentCard";
 import {
   CheckoutContainer,
   LeftContainer,
@@ -13,6 +14,7 @@ function Checkout() {
         <TitleContainer>Complete seu pedido</TitleContainer>
 
         <AddressCard />
+        <PaymentCard />
       </LeftContainer>
 
       <RightContainer>
