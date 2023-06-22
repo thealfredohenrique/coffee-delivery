@@ -38,4 +38,24 @@ export const CartContainer = styled.div`
   padding: 0.5rem;
   border-radius: 8px;
   cursor: pointer;
+  position: relative;
+`;
+
+export const CartCounterContainer = styled.span`
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 1000px;
+  background: ${(props) => props.theme.yellowDark};
+  color: ${(props) => props.theme.white};
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.045rem;
 `;
