@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { MapPin, ShoppingCart } from "@phosphor-icons/react";
+import { CartContext } from "../../contexts/CartContext";
 import logo from "../../assets/logo.svg";
 import {
   ActionsContainer,
@@ -10,6 +12,8 @@ import {
 } from "./styles";
 
 function Header() {
+  const { items } = useContext(CartContext);
+
   return (
     <HeaderContainer>
       <img src={logo} />
@@ -21,7 +25,9 @@ function Header() {
         <NavLink to="/checkout">
           <CartContainer>
             <ShoppingCart size={22} weight="fill" />
-            <CartCounterContainer>3</CartCounterContainer>
+            {items.length > 0 && (
+              <CartCounterContainer>{items.length}</CartCounterContainer>
+            )}
           </CartContainer>
         </NavLink>
       </ActionsContainer>

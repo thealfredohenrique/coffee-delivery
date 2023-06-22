@@ -1,4 +1,5 @@
 import { Minus, Plus, Trash } from "@phosphor-icons/react";
+import { Coffee } from "../../../../contexts/CartContext";
 import {
   CartItemActionsContainer,
   CartItemContainer,
@@ -12,17 +13,21 @@ import {
   CounterButtonContainer,
 } from "./styles";
 
-function CartItem() {
+interface CartItemProps {
+  coffee: Coffee;
+}
+
+function CartItem({ coffee }: CartItemProps) {
   return (
     <CartItemContainer>
       <CartItemImageContainer
-        src="/src/assets/traditional-espresso-coffee.png"
-        alt="Expresso Tradicional"
+        src={`/src/assets/${coffee.image}`}
+        alt={coffee.name}
       />
 
       <CartItemDetailsContainer>
         <CartItemInfoContainer>
-          <CartItemNameContainer>Expresso Tradicional</CartItemNameContainer>
+          <CartItemNameContainer>{coffee.name}</CartItemNameContainer>
           <CartItemPriceContainer>R$ 9,90</CartItemPriceContainer>
         </CartItemInfoContainer>
 

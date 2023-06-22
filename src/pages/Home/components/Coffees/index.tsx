@@ -130,14 +130,7 @@ function Coffees() {
       <SectionTitleContainer>Nossos cafés</SectionTitleContainer>
       <CoffeesListContainer>
         {coffees.map((coffee) => (
-          <CoffeeCard
-            key={coffee.id}
-            image={coffee.image}
-            tags={coffee.tags}
-            name={coffee.name}
-            description={coffee.description}
-            price={coffee.price}
-          />
+          <CoffeeCard key={coffee.id} coffee={coffee} />
         ))}
       </CoffeesListContainer>
     </CoffeesContainer>

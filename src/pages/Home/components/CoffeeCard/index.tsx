@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Minus, Plus, ShoppingCart } from "@phosphor-icons/react";
+import { CartContext, Coffee } from "../../../../contexts/CartContext";
 import {
   BuyButtonContainer,
   BuyCoffeeContainer,
@@ -16,28 +17,19 @@ import {
 } from "./styles";
 
 interface CoffeeCardProps {
-  image: string;
-  tags: string[];
-  name: string;
-  description: string;
-  price: number;
+  coffee: Coffee;
 }
 
 const MIN_COUNTER = 1;
 
-function CoffeeCard({
-  image,
-  tags,
-  name,
-  description,
-  price,
-}: CoffeeCardProps) {
+function CoffeeCard({ coffee }: CoffeeCardProps) {
   const [counter, setCounter] = useState(MIN_COUNTER);
+  const { addCoffeeToCart } = useContext(CartContext);
 
   const canDecrease = counter > MIN_COUNTER;
   const formattedPrice = new Intl.NumberFormat("pt-BR", {
     minimumFractionDigits: 2,
-  }).format(price);
+  }).format(coffee.price);
 
   function handleDecrease() {
     if (canDecrease) setCounter((currentValue) => currentValue - 1);
@@ -47,20 +39,29 @@ function CoffeeCard({
     setCounter((currentValue) => currentValue + 1);
   }
 
+  function handleAddToCart() {
+    addCoffeeToCart(coffee);
+  }
+
   return (
     <CoffeeCardContainer>
       <CoffeeFigureContainer>
-        <CoffeeImageContainer src={`/src/assets/${image}`} alt={name} />
+        <CoffeeImageContainer
+          src={`/src/assets/${coffee.image}`}
+          alt={coffee.name}
+        />
 
         <CoffeeTagsContainer>
-          {tags.map((tag) => (
+          {coffee.tags.map((tag) => (
             <CoffeeTagContainer key={tag}>{tag}</CoffeeTagContainer>
           ))}
         </CoffeeTagsContainer>
       </CoffeeFigureContainer>
 
-      <CoffeeTitleContainer>{name}</CoffeeTitleContainer>
-      <CoffeeDescriptionContainer>{description}</CoffeeDescriptionContainer>
+      <CoffeeTitleContainer>{coffee.name}</CoffeeTitleContainer>
+      <CoffeeDescriptionContainer>
+        {coffee.description}
+      </CoffeeDescriptionContainer>
 
       <BuyCoffeeContainer>
         <CoffeePriceContainer>
@@ -80,7 +81,7 @@ function CoffeeCard({
           </CounterButtonContainer>
         </CoffeeCounterContainer>
 
-        <BuyButtonContainer>
+        <BuyButtonContainer onClick={handleAddToCart}>
           <ShoppingCart size={22} weight="fill" />
         </BuyButtonContainer>
       </BuyCoffeeContainer>
