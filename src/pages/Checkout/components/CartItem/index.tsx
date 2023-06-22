@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Minus, Plus, Trash } from "@phosphor-icons/react";
-import { CartContext, Coffee } from "../../../../contexts/CartContext";
+import { CartContext, CartItemData } from "../../../../contexts/CartContext";
 import {
   CartItemActionsContainer,
   CartItemContainer,
@@ -15,14 +15,27 @@ import {
 } from "./styles";
 
 interface CartItemProps {
-  coffee: Coffee;
+  coffee: CartItemData;
 }
 
 function CartItem({ coffee }: CartItemProps) {
-  const { removeCoffeeFromCart } = useContext(CartContext);
+  const { removeItemFromCart, changeItemQuantity } = useContext(CartContext);
+
+  const formattedPrice = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(coffee.price * coffee.quantity);
 
   function handleRemove() {
-    removeCoffeeFromCart(coffee.id);
+    removeItemFromCart(coffee.id);
+  }
+
+  function handleDecrease() {
+    if (coffee.quantity > 1) changeItemQuantity(coffee.id, coffee.quantity - 1);
+  }
+
+  function handleIncrease() {
+    changeItemQuantity(coffee.id, coffee.quantity + 1);
   }
 
   return (
@@ -35,25 +48,24 @@ function CartItem({ coffee }: CartItemProps) {
       <CartItemDetailsContainer>
         <CartItemInfoContainer>
           <CartItemNameContainer>{coffee.name}</CartItemNameContainer>
-          <CartItemPriceContainer>R$ 9,90</CartItemPriceContainer>
+          <CartItemPriceContainer>{formattedPrice}</CartItemPriceContainer>
         </CartItemInfoContainer>
 
         <CartItemActionsContainer>
           <CartItemCounterContainer>
-            <CounterButtonContainer>
+            <CounterButtonContainer onClick={handleDecrease}>
               <Minus size={14} weight="bold" />
             </CounterButtonContainer>
 
-            <span>1</span>
+            <span>{coffee.quantity}</span>
 
-            <CounterButtonContainer>
+            <CounterButtonContainer onClick={handleIncrease}>
               <Plus size={14} weight="bold" />
             </CounterButtonContainer>
           </CartItemCounterContainer>
 
           <CartItemRemoveContainer onClick={handleRemove}>
-            <Trash size={16} />
-            Remover
+            <Trash size={16} /> Remover
           </CartItemRemoveContainer>
         </CartItemActionsContainer>
       </CartItemDetailsContainer>

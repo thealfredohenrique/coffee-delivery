@@ -20,27 +20,27 @@ interface CoffeeCardProps {
   coffee: Coffee;
 }
 
-const MIN_COUNTER = 1;
+const MIN_QUANTITY = 1;
 
 function CoffeeCard({ coffee }: CoffeeCardProps) {
-  const [counter, setCounter] = useState(MIN_COUNTER);
-  const { addCoffeeToCart } = useContext(CartContext);
+  const [quantity, setQuantity] = useState(MIN_QUANTITY);
+  const { addItemToCart } = useContext(CartContext);
 
-  const canDecrease = counter > MIN_COUNTER;
+  const canDecrease = quantity > MIN_QUANTITY;
   const formattedPrice = new Intl.NumberFormat("pt-BR", {
     minimumFractionDigits: 2,
   }).format(coffee.price);
 
   function handleDecrease() {
-    if (canDecrease) setCounter((currentValue) => currentValue - 1);
+    if (canDecrease) setQuantity((currentValue) => currentValue - 1);
   }
 
   function handleIncrease() {
-    setCounter((currentValue) => currentValue + 1);
+    setQuantity((currentValue) => currentValue + 1);
   }
 
   function handleAddToCart() {
-    addCoffeeToCart(coffee);
+    addItemToCart({ ...coffee, quantity });
   }
 
   return (
@@ -75,7 +75,7 @@ function CoffeeCard({ coffee }: CoffeeCardProps) {
           >
             <Minus size={14} weight="bold" />
           </CounterButtonContainer>
-          <span>{counter}</span>
+          <span>{quantity}</span>
           <CounterButtonContainer onClick={handleIncrease}>
             <Plus size={14} weight="bold" />
           </CounterButtonContainer>

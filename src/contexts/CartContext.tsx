@@ -9,10 +9,15 @@ export interface Coffee {
   price: number;
 }
 
+export type CartItemData = Coffee & {
+  quantity: number;
+};
+
 interface CartContextData {
-  items: Coffee[];
-  addCoffeeToCart(coffee: Coffee): void;
-  removeCoffeeFromCart(coffeeId: string): void;
+  items: CartItemData[];
+  addItemToCart(item: CartItemData): void;
+  removeItemFromCart(itemId: string): void;
+  changeItemQuantity(itemId: string, quantity: number): void;
 }
 
 interface CartContextProviderProps {
@@ -22,19 +27,31 @@ interface CartContextProviderProps {
 export const CartContext = createContext({} as CartContextData);
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
-  const [items, setItems] = useState<Coffee[]>([]);
+  const [items, setItems] = useState<CartItemData[]>([]);
 
-  function addCoffeeToCart(coffee: Coffee) {
-    setItems((currentValue) => [...currentValue, coffee]);
+  function addItemToCart(item: CartItemData) {
+    setItems((currentValue) => [...currentValue, item]);
   }
 
-  function removeCoffeeFromCart(coffeeId: string) {
-    setItems((currentValue) => currentValue.filter((e) => e.id !== coffeeId));
+  function removeItemFromCart(itemId: string) {
+    setItems((currentValue) => currentValue.filter((e) => e.id !== itemId));
+  }
+
+  function changeItemQuantity(itemId: string, quantity: number) {
+    setItems((currentValue) =>
+      currentValue.map((item) => {
+        if (item.id === itemId) {
+          return { ...item, quantity };
+        } else {
+          return item;
+        }
+      })
+    );
   }
 
   return (
     <CartContext.Provider
-      value={{ items, addCoffeeToCart, removeCoffeeFromCart }}
+      value={{ items, addItemToCart, removeItemFromCart, changeItemQuantity }}
     >
       {children}
     </CartContext.Provider>
