@@ -12,6 +12,7 @@ export interface Coffee {
 interface CartContextData {
   items: Coffee[];
   addCoffeeToCart(coffee: Coffee): void;
+  removeCoffeeFromCart(coffeeId: string): void;
 }
 
 interface CartContextProviderProps {
@@ -27,8 +28,14 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     setItems((currentValue) => [...currentValue, coffee]);
   }
 
+  function removeCoffeeFromCart(coffeeId: string) {
+    setItems((currentValue) => currentValue.filter((e) => e.id !== coffeeId));
+  }
+
   return (
-    <CartContext.Provider value={{ items, addCoffeeToCart }}>
+    <CartContext.Provider
+      value={{ items, addCoffeeToCart, removeCoffeeFromCart }}
+    >
       {children}
     </CartContext.Provider>
   );

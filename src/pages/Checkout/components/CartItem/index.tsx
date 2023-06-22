@@ -1,5 +1,6 @@
+import { useContext } from "react";
 import { Minus, Plus, Trash } from "@phosphor-icons/react";
-import { Coffee } from "../../../../contexts/CartContext";
+import { CartContext, Coffee } from "../../../../contexts/CartContext";
 import {
   CartItemActionsContainer,
   CartItemContainer,
@@ -18,6 +19,12 @@ interface CartItemProps {
 }
 
 function CartItem({ coffee }: CartItemProps) {
+  const { removeCoffeeFromCart } = useContext(CartContext);
+
+  function handleRemove() {
+    removeCoffeeFromCart(coffee.id);
+  }
+
   return (
     <CartItemContainer>
       <CartItemImageContainer
@@ -44,7 +51,7 @@ function CartItem({ coffee }: CartItemProps) {
             </CounterButtonContainer>
           </CartItemCounterContainer>
 
-          <CartItemRemoveContainer>
+          <CartItemRemoveContainer onClick={handleRemove}>
             <Trash size={16} />
             Remover
           </CartItemRemoveContainer>
