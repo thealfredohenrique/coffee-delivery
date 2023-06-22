@@ -101,6 +101,10 @@ export const CounterButtonContainer = styled(BaseButton)`
   &:hover {
     color: ${(props) => props.theme.purpleDark};
   }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 `;
 
 export const BuyButtonContainer = styled(BaseButton)`

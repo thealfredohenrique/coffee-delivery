@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Minus, Plus, ShoppingCart } from "@phosphor-icons/react";
 import {
   BuyButtonContainer,
@@ -22,7 +23,30 @@ interface CoffeeCardProps {
   price: number;
 }
 
-function CoffeeCard({ image, tags, name, description }: CoffeeCardProps) {
+const MIN_COUNTER = 1;
+
+function CoffeeCard({
+  image,
+  tags,
+  name,
+  description,
+  price,
+}: CoffeeCardProps) {
+  const [counter, setCounter] = useState(MIN_COUNTER);
+
+  const canDecrease = counter > MIN_COUNTER;
+  const formattedPrice = new Intl.NumberFormat("pt-BR", {
+    minimumFractionDigits: 2,
+  }).format(price);
+
+  function handleDecrease() {
+    if (canDecrease) setCounter((currentValue) => currentValue - 1);
+  }
+
+  function handleIncrease() {
+    setCounter((currentValue) => currentValue + 1);
+  }
+
   return (
     <CoffeeCardContainer>
       <CoffeeFigureContainer>
@@ -40,15 +64,18 @@ function CoffeeCard({ image, tags, name, description }: CoffeeCardProps) {
 
       <BuyCoffeeContainer>
         <CoffeePriceContainer>
-          R$ <strong>9,90</strong>
+          R$ <strong>{formattedPrice}</strong>
         </CoffeePriceContainer>
 
         <CoffeeCounterContainer>
-          <CounterButtonContainer>
+          <CounterButtonContainer
+            onClick={handleDecrease}
+            disabled={!canDecrease}
+          >
             <Minus size={14} weight="bold" />
           </CounterButtonContainer>
-          <span>1</span>
-          <CounterButtonContainer>
+          <span>{counter}</span>
+          <CounterButtonContainer onClick={handleIncrease}>
             <Plus size={14} weight="bold" />
           </CounterButtonContainer>
         </CoffeeCounterContainer>
