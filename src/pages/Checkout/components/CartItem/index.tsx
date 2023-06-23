@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Minus, Plus, Trash } from "@phosphor-icons/react";
 import { CartContext, CartItemData } from "../../../../contexts/CartContext";
+import { formatCurrency } from "../../../../utils/format-currency";
 import {
   CartItemActionsContainer,
   CartItemContainer,
@@ -21,10 +22,7 @@ interface CartItemProps {
 function CartItem({ coffee }: CartItemProps) {
   const { removeItemFromCart, changeItemQuantity } = useContext(CartContext);
 
-  const formattedPrice = new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  }).format(coffee.price * coffee.quantity);
+  const formattedPrice = formatCurrency(coffee.price * coffee.quantity);
 
   function handleRemove() {
     removeItemFromCart(coffee.id);

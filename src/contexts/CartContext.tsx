@@ -22,6 +22,7 @@ interface CartContextData {
   addItemToCart(item: CartItemData): void;
   removeItemFromCart(itemId: string): void;
   changeItemQuantity(itemId: string, quantity: number): void;
+  getItemsTotal(): number;
 }
 
 interface CartContextProviderProps {
@@ -48,9 +49,19 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     dispatch(changeItemQuantityAction(itemId, itemQuantity));
   }
 
+  function getItemsTotal() {
+    return items.reduce((total, item) => total + item.price * item.quantity, 0);
+  }
+
   return (
     <CartContext.Provider
-      value={{ items, addItemToCart, removeItemFromCart, changeItemQuantity }}
+      value={{
+        items,
+        addItemToCart,
+        removeItemFromCart,
+        changeItemQuantity,
+        getItemsTotal,
+      }}
     >
       {children}
     </CartContext.Provider>

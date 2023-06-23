@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { CartContext } from "../../../../contexts/CartContext";
 import CartItem from "../CartItem";
+import { formatCurrency } from "../../../../utils/format-currency";
 import {
   CartButtonContainer,
   CartCardContainer,
@@ -9,8 +10,13 @@ import {
   CartTotalsItemContainer,
 } from "./styles";
 
+const DELIVERY_FEE = 3.5;
+
 function CartCard() {
-  const { items } = useContext(CartContext);
+  const { items, getItemsTotal } = useContext(CartContext);
+
+  const itemsTotal = getItemsTotal();
+  const cartTotal = itemsTotal + DELIVERY_FEE;
 
   return (
     <CartCardContainer>
@@ -23,17 +29,17 @@ function CartCard() {
       <CartTotalsContainer>
         <CartTotalsItemContainer>
           <h3>Total de itens</h3>
-          <span>R$ 29,70</span>
+          <span>{formatCurrency(itemsTotal)}</span>
         </CartTotalsItemContainer>
 
         <CartTotalsItemContainer>
           <h3>Entrega</h3>
-          <span>R$ 3,50</span>
+          <span>{formatCurrency(DELIVERY_FEE)}</span>
         </CartTotalsItemContainer>
 
         <CartTotalsItemContainer>
           <strong>Total</strong>
-          <strong>R$ 33,20</strong>
+          <strong>{formatCurrency(cartTotal)}</strong>
         </CartTotalsItemContainer>
       </CartTotalsContainer>
 
