@@ -9,8 +9,15 @@ interface CartState {
 function cartReducer(state: CartState, action: any) {
   switch (action.type) {
     case ActionTypes.ADD_ITEM_TO_CART: {
+      const itemIndex = state.items.findIndex((item) => {
+        return item.id === action.payload.item.id;
+      });
       return produce(state, (draft) => {
-        draft.items.push(action.payload.item);
+        if (itemIndex > -1) {
+          draft.items[itemIndex].quantity += action.payload.item.quantity;
+        } else {
+          draft.items.push(action.payload.item);
+        }
       });
     }
     case ActionTypes.REMOVE_ITEM_FROM_CART: {

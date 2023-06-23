@@ -41,6 +41,7 @@ function CoffeeCard({ coffee }: CoffeeCardProps) {
 
   function handleAddToCart() {
     addItemToCart({ ...coffee, quantity });
+    setQuantity(MIN_QUANTITY);
   }
 
   return (
