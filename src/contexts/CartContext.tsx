@@ -1,4 +1,10 @@
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useReducer } from "react";
+import {
+  addItemToCartAction,
+  changeItemQuantityAction,
+  removeItemFromCartAction,
+} from "../reducers/cart/actions";
+import cartReducer from "../reducers/cart/reducer";
 
 export interface Coffee {
   id: string;
@@ -9,9 +15,7 @@ export interface Coffee {
   price: number;
 }
 
-export type CartItemData = Coffee & {
-  quantity: number;
-};
+export type CartItemData = Coffee & { quantity: number };
 
 interface CartContextData {
   items: CartItemData[];
@@ -27,26 +31,21 @@ interface CartContextProviderProps {
 export const CartContext = createContext({} as CartContextData);
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
-  const [items, setItems] = useState<CartItemData[]>([]);
+  const [cart, dispatch] = useReducer(cartReducer, {
+    items: [],
+  });
+  const { items } = cart;
 
   function addItemToCart(item: CartItemData) {
-    setItems((currentValue) => [...currentValue, item]);
+    dispatch(addItemToCartAction(item));
   }
 
   function removeItemFromCart(itemId: string) {
-    setItems((currentValue) => currentValue.filter((e) => e.id !== itemId));
+    dispatch(removeItemFromCartAction(itemId));
   }
 
-  function changeItemQuantity(itemId: string, quantity: number) {
-    setItems((currentValue) =>
-      currentValue.map((item) => {
-        if (item.id === itemId) {
-          return { ...item, quantity };
-        } else {
-          return item;
-        }
-      })
-    );
+  function changeItemQuantity(itemId: string, itemQuantity: number) {
+    dispatch(changeItemQuantityAction(itemId, itemQuantity));
   }
 
   return (
