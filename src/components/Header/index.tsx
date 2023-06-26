@@ -15,6 +15,8 @@ import {
 function Header() {
   const { items } = useContext(CartContext);
 
+  const cartItemsQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <HeaderContainer>
       <HeaderContentWrapper>
@@ -28,7 +30,7 @@ function Header() {
             <CartContainer>
               <ShoppingCart size={22} weight="fill" />
               {items.length > 0 && (
-                <CartCounterContainer>{items.length}</CartCounterContainer>
+                <CartCounterContainer>{cartItemsQuantity}</CartCounterContainer>
               )}
             </CartContainer>
           </NavLink>
