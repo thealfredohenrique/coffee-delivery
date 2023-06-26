@@ -1,11 +1,20 @@
 import { styled } from "styled-components";
 
 export const HeaderContainer = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background: ${(props) => props.theme.background};
+`;
+
+export const HeaderContentWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 2rem 0;
   max-width: 70rem;
   margin: 0 auto;
+  padding: 2rem 0;
 `;
 
 export const ActionsContainer = styled.div`

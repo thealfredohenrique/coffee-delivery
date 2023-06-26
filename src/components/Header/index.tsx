@@ -8,6 +8,7 @@ import {
   CartContainer,
   CartCounterContainer,
   HeaderContainer,
+  HeaderContentWrapper,
   LocationContainer,
 } from "./styles";
 
@@ -16,21 +17,23 @@ function Header() {
 
   return (
     <HeaderContainer>
-      <img src={logo} />
-      <ActionsContainer>
-        <LocationContainer>
-          <MapPin size={22} weight="fill" />
-          Porto Alegre, RS
-        </LocationContainer>
-        <NavLink to="/checkout">
-          <CartContainer>
-            <ShoppingCart size={22} weight="fill" />
-            {items.length > 0 && (
-              <CartCounterContainer>{items.length}</CartCounterContainer>
-            )}
-          </CartContainer>
-        </NavLink>
-      </ActionsContainer>
+      <HeaderContentWrapper>
+        <img src={logo} />
+        <ActionsContainer>
+          <LocationContainer>
+            <MapPin size={22} weight="fill" />
+            Porto Alegre, RS
+          </LocationContainer>
+          <NavLink to="/checkout">
+            <CartContainer>
+              <ShoppingCart size={22} weight="fill" />
+              {items.length > 0 && (
+                <CartCounterContainer>{items.length}</CartCounterContainer>
+              )}
+            </CartContainer>
+          </NavLink>
+        </ActionsContainer>
+      </HeaderContentWrapper>
     </HeaderContainer>
   );
 }
