@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CartContext } from "../../../../contexts/CartContext";
+import { OrderContext } from "../../../../contexts/OrderContext";
 import CartItem from "../CartItem";
 import { formatCurrency } from "../../../../utils/format-currency";
 import {
@@ -13,9 +13,12 @@ import {
 const DELIVERY_FEE = 3.5;
 
 function CartCard() {
-  const { items, getItemsTotal } = useContext(CartContext);
+  const { items } = useContext(OrderContext);
 
-  const itemsTotal = getItemsTotal();
+  const itemsTotal = items.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
   const cartTotal = itemsTotal + DELIVERY_FEE;
 
   return (

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Minus, Plus, Trash } from "@phosphor-icons/react";
-import { CartContext, CartItemData } from "../../../../contexts/CartContext";
+import { OrderContext, CartItemData } from "../../../../contexts/OrderContext";
 import { formatCurrency } from "../../../../utils/format-currency";
 import {
   CartItemActionsContainer,
@@ -20,7 +20,7 @@ interface CartItemProps {
 }
 
 function CartItem({ coffee }: CartItemProps) {
-  const { removeItemFromCart, changeItemQuantity } = useContext(CartContext);
+  const { removeItemFromCart, changeItemQuantity } = useContext(OrderContext);
 
   const formattedPrice = formatCurrency(coffee.price * coffee.quantity);
 

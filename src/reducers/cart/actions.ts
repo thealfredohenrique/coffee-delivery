@@ -1,4 +1,4 @@
-import { CartItemData } from "../../contexts/CartContext";
+import { CartItemData } from "../../contexts/OrderContext";
 
 export enum ActionTypes {
   ADD_ITEM_TO_CART = "ADD_ITEM_TO_CART",

@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Minus, Plus, ShoppingCart } from "@phosphor-icons/react";
-import { CartContext, Coffee } from "../../../../contexts/CartContext";
+import { OrderContext, Coffee } from "../../../../contexts/OrderContext";
 import {
   BuyButtonContainer,
   BuyCoffeeContainer,
@@ -24,7 +24,7 @@ const MIN_QUANTITY = 1;
 
 function CoffeeCard({ coffee }: CoffeeCardProps) {
   const [quantity, setQuantity] = useState(MIN_QUANTITY);
-  const { addItemToCart } = useContext(CartContext);
+  const { addItemToCart } = useContext(OrderContext);
 
   const canDecrease = quantity > MIN_QUANTITY;
   const formattedPrice = new Intl.NumberFormat("pt-BR", {

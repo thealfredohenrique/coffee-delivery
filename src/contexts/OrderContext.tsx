@@ -17,21 +17,20 @@ export interface Coffee {
 
 export type CartItemData = Coffee & { quantity: number };
 
-interface CartContextData {
+interface OrderContextData {
   items: CartItemData[];
   addItemToCart(item: CartItemData): void;
   removeItemFromCart(itemId: string): void;
   changeItemQuantity(itemId: string, quantity: number): void;
-  getItemsTotal(): number;
 }
 
-interface CartContextProviderProps {
+interface OrderContextProviderProps {
   children: ReactNode;
 }
 
-export const CartContext = createContext({} as CartContextData);
+export const OrderContext = createContext({} as OrderContextData);
 
-export function CartContextProvider({ children }: CartContextProviderProps) {
+export function OrderContextProvider({ children }: OrderContextProviderProps) {
   const [cart, dispatch] = useReducer(cartReducer, {
     items: [],
   });
@@ -49,21 +48,16 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     dispatch(changeItemQuantityAction(itemId, itemQuantity));
   }
 
-  function getItemsTotal() {
-    return items.reduce((total, item) => total + item.price * item.quantity, 0);
-  }
-
   return (
-    <CartContext.Provider
+    <OrderContext.Provider
       value={{
         items,
         addItemToCart,
         removeItemFromCart,
         changeItemQuantity,
-        getItemsTotal,
       }}
     >
       {children}
-    </CartContext.Provider>
+    </OrderContext.Provider>
   );
 }

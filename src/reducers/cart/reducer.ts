@@ -1,5 +1,5 @@
 import { produce } from "immer";
-import { CartItemData } from "../../contexts/CartContext";
+import { CartItemData } from "../../contexts/OrderContext";
 import { ActionTypes } from "./actions";
 
 interface CartState {

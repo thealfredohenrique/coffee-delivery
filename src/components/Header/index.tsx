@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { MapPin, ShoppingCart } from "@phosphor-icons/react";
-import { CartContext } from "../../contexts/CartContext";
+import { OrderContext } from "../../contexts/OrderContext";
 import logo from "../../assets/logo.svg";
 import {
   ActionsContainer,
@@ -13,7 +13,7 @@ import {
 } from "./styles";
 
 function Header() {
-  const { items } = useContext(CartContext);
+  const { items } = useContext(OrderContext);
 
   const cartItemsQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
 
