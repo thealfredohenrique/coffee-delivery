@@ -5,8 +5,11 @@ import {
   LegendTextContainer,
 } from "../../styles";
 import { FieldContainer, FieldsetContainer } from "./styles";
+import { useFormContext } from "react-hook-form";
 
 function AddressCard() {
+  const { register } = useFormContext();
+
   return (
     <CardContainer>
       <LegendContainer color="yellow">
@@ -21,30 +24,45 @@ function AddressCard() {
       <FieldsetContainer>
         <FieldContainer
           type="text"
-          name="zip-code"
           placeholder="CEP"
           required
+          {...register("zipCode")}
         />
-        <FieldContainer type="text" name="street" placeholder="Rua" required />
         <FieldContainer
           type="text"
-          name="number"
+          placeholder="Rua"
+          required
+          {...register("street")}
+        />
+        <FieldContainer
+          type="text"
           placeholder="Número"
           required
+          {...register("number")}
         />
         <FieldContainer
           type="text"
-          name="complement"
           placeholder="Complemento"
+          {...register("complement")}
         ></FieldContainer>
         <FieldContainer
           type="text"
-          name="neighborhood"
           placeholder="Bairro"
           required
+          {...register("neighborhood")}
         />
-        <FieldContainer type="text" name="city" placeholder="Cidade" required />
-        <FieldContainer type="text" name="state" placeholder="UF" required />
+        <FieldContainer
+          type="text"
+          placeholder="Cidade"
+          required
+          {...register("city")}
+        />
+        <FieldContainer
+          type="text"
+          placeholder="UF"
+          required
+          {...register("state")}
+        />
       </FieldsetContainer>
     </CardContainer>
   );
