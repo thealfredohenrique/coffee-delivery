@@ -46,7 +46,7 @@ function CartCard() {
         </CartTotalsItemContainer>
       </CartTotalsContainer>
 
-      <CartButtonContainer>Confirmar pedido</CartButtonContainer>
+      <CartButtonContainer type="submit">Confirmar pedido</CartButtonContainer>
     </CartCardContainer>
   );
 }

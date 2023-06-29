@@ -8,37 +8,37 @@ export const FieldsetContainer = styled.fieldset`
   column-gap: 0.75rem;
   border: none;
 
-  input[name="zip-code"] {
+  input[name="address.zipCode"] {
     grid-row: 1;
     grid-column: 1 / span 1;
   }
 
-  input[name="street"] {
+  input[name="address.street"] {
     grid-row: 2;
     grid-column: 1 / span 3;
   }
 
-  input[name="number"] {
+  input[name="address.number"] {
     grid-row: 3;
     grid-column: 1 / span 1;
   }
 
-  input[name="complement"] {
+  input[name="address.complement"] {
     grid-row: 3;
     grid-column: 2 / span 2;
   }
 
-  input[name="neighborhood"] {
+  input[name="address.neighborhood"] {
     grid-row: 4;
     grid-column: 1 / span 1;
   }
 
-  input[name="city"] {
+  input[name="address.city"] {
     grid-row: 4;
     grid-column: 2 / span 1;
   }
 
-  input[name="state"] {
+  input[name="address.state"] {
     grid-row: 4;
     grid-column: 3 / span 1;
   }

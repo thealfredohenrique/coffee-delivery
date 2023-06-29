@@ -1,5 +1,6 @@
 import { useFormContext } from "react-hook-form";
 import { Bank, CreditCard, CurrencyDollar, Money } from "@phosphor-icons/react";
+import { PaymentType } from "../..";
 import {
   CardContainer,
   LegendContainer,
@@ -27,8 +28,9 @@ function PaymentCard() {
         <InputContainer
           type="radio"
           id="credit-payment-type"
-          value="credit-card"
-          {...register("paymentType", { required: true })}
+          value={PaymentType.CreditCard}
+          required
+          {...register("paymentType")}
         />
         <PaymentTypeOption htmlFor="credit-payment-type">
           <CreditCard size={16} />
@@ -38,8 +40,9 @@ function PaymentCard() {
         <InputContainer
           type="radio"
           id="debit-payment-type"
-          value="debit-card"
-          {...register("paymentType", { required: true })}
+          value={PaymentType.DebitCard}
+          required
+          {...register("paymentType")}
         />
         <PaymentTypeOption htmlFor="debit-payment-type">
           <Bank size={16} />
@@ -48,11 +51,12 @@ function PaymentCard() {
 
         <InputContainer
           type="radio"
-          id="money-payment-type"
-          value="money"
-          {...register("paymentType", { required: true })}
+          id="cash-payment-type"
+          value={PaymentType.Cash}
+          required
+          {...register("paymentType")}
         />
-        <PaymentTypeOption htmlFor="money-payment-type">
+        <PaymentTypeOption htmlFor="cash-payment-type">
           <Money size={16} />
           Dinheiro
         </PaymentTypeOption>

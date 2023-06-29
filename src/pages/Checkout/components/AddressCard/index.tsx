@@ -25,43 +25,47 @@ function AddressCard() {
         <FieldContainer
           type="text"
           placeholder="CEP"
+          minLength={8}
+          maxLength={8}
           required
-          {...register("zipCode")}
+          {...register("address.zipCode")}
         />
         <FieldContainer
           type="text"
           placeholder="Rua"
           required
-          {...register("street")}
+          {...register("address.street")}
         />
         <FieldContainer
           type="text"
           placeholder="Número"
           required
-          {...register("number")}
+          {...register("address.number")}
         />
         <FieldContainer
           type="text"
           placeholder="Complemento"
-          {...register("complement")}
+          {...register("address.complement")}
         ></FieldContainer>
         <FieldContainer
           type="text"
           placeholder="Bairro"
           required
-          {...register("neighborhood")}
+          {...register("address.neighborhood")}
         />
         <FieldContainer
           type="text"
           placeholder="Cidade"
           required
-          {...register("city")}
+          {...register("address.city")}
         />
         <FieldContainer
           type="text"
           placeholder="UF"
+          minLength={2}
+          maxLength={2}
           required
-          {...register("state")}
+          {...register("address.state")}
         />
       </FieldsetContainer>
     </CardContainer>

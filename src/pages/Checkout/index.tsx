@@ -11,34 +11,33 @@ import {
   TitleContainer,
 } from "./styles";
 
+export enum PaymentType {
+  CreditCard = "CREDIT_CARD",
+  DebitCard = "DEBIT_CARD",
+  Cash = "CASH",
+}
+
 const validationSchema = zod.object({
   address: zod.object({
     zipCode: zod
       .string()
       .trim()
       .length(8, "O campo CEP precisa ter 8 caracteres."),
-    street: zod
-      .string()
-      .trim()
-      .min(3, "O campo Rua precisa ter no mínimo 3 caracteres."),
-    number: zod
-      .string()
-      .min(1, "O campo Número precisa ter no mínimo um caractere."),
+    street: zod.string().trim().min(1, "Informe o campo Rua."),
+    number: zod.string().min(1, "Informe o campo Número."),
     complement: zod.string().trim().optional(),
-    neighborhood: zod
-      .string()
-      .trim()
-      .min(3, "O campo Bairro precisa ter no mínimo 3 caracteres."),
-    city: zod
-      .string()
-      .trim()
-      .min(3, "O campo Cidade precisa ter no mínimo 3 caracteres."),
+    neighborhood: zod.string().trim().min(1, "Informe o campo Bairro."),
+    city: zod.string().trim().min(1, "Informe o campo Cidade."),
     state: zod
       .string()
       .trim()
       .length(2, "O campo UF precisa ter 2 caracteres."),
   }),
-  paymentType: zod.string(),
+  paymentType: zod.enum([
+    PaymentType.CreditCard,
+    PaymentType.DebitCard,
+    PaymentType.Cash,
+  ]),
 });
 
 type OrderFormData = zod.infer<typeof validationSchema>;
@@ -46,22 +45,15 @@ type OrderFormData = zod.infer<typeof validationSchema>;
 function Checkout() {
   const orderForm = useForm<OrderFormData>({
     resolver: zodResolver(validationSchema),
-    defaultValues: {
-      address: {
-        zipCode: "",
-        street: "",
-        number: "",
-        complement: "",
-        neighborhood: "",
-        city: "",
-        state: "",
-      },
-      paymentType: "",
-    },
   });
+  const { handleSubmit } = orderForm;
+
+  function handleSubmitOrder(data: OrderFormData) {
+    console.log("data", data);
+  }
 
   return (
-    <CheckoutContainer>
+    <CheckoutContainer onSubmit={handleSubmit(handleSubmitOrder)}>
       <LeftContainer>
         <TitleContainer>Complete seu pedido</TitleContainer>
 

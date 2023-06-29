@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const CheckoutContainer = styled.div`
+export const CheckoutContainer = styled.form`
   display: flex;
   gap: 2rem;
   max-width: 70rem;
@@ -30,7 +30,7 @@ export const TitleContainer = styled.h1`
   color: ${(props) => props.theme.baseSubtitle};
 `;
 
-export const CardContainer = styled.form`
+export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
