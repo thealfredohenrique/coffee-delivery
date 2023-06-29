@@ -1,10 +1,11 @@
-import { ReactNode, createContext, useReducer } from "react";
+import { ReactNode, createContext, useReducer, useState } from "react";
 import {
   addItemToCartAction,
   changeItemQuantityAction,
   removeItemFromCartAction,
 } from "../reducers/cart/actions";
 import cartReducer from "../reducers/cart/reducer";
+import { PaymentType } from "../pages/Checkout";
 
 export interface Coffee {
   id: string;
@@ -17,11 +18,25 @@ export interface Coffee {
 
 export type CartItemData = Coffee & { quantity: number };
 
+interface Address {
+  zipCode: string;
+  street: string;
+  number: string;
+  complement?: string | undefined;
+  neighborhood: string;
+  city: string;
+  state: string;
+}
+
 interface OrderContextData {
   items: CartItemData[];
+  address: Address | null;
+  paymentType: PaymentType | null;
   addItemToCart(item: CartItemData): void;
   removeItemFromCart(itemId: string): void;
   changeItemQuantity(itemId: string, quantity: number): void;
+  fillAddress(address: Address): void;
+  fillPaymentType(paymentType: PaymentType): void;
 }
 
 interface OrderContextProviderProps {
@@ -31,6 +46,8 @@ interface OrderContextProviderProps {
 export const OrderContext = createContext({} as OrderContextData);
 
 export function OrderContextProvider({ children }: OrderContextProviderProps) {
+  const [address, setAddress] = useState<Address | null>(null);
+  const [paymentType, setPaymentType] = useState<PaymentType | null>(null);
   const [cart, dispatch] = useReducer(cartReducer, {
     items: [],
   });
@@ -48,13 +65,25 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
     dispatch(changeItemQuantityAction(itemId, itemQuantity));
   }
 
+  function fillAddress(address: Address) {
+    setAddress(address);
+  }
+
+  function fillPaymentType(paymentType: PaymentType) {
+    setPaymentType(paymentType);
+  }
+
   return (
     <OrderContext.Provider
       value={{
         items,
+        address,
+        paymentType,
         addItemToCart,
         removeItemFromCart,
         changeItemQuantity,
+        fillAddress,
+        fillPaymentType,
       }}
     >
       {children}

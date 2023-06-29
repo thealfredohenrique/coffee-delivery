@@ -1,4 +1,7 @@
+import { useContext } from "react";
 import { CurrencyDollar, MapPin, Timer } from "@phosphor-icons/react";
+import { OrderContext } from "../../contexts/OrderContext";
+import { PaymentType } from "../Checkout";
 import deliveryIllustration from "../../assets/delivery-illustration.svg";
 import {
   SuccessContainer,
@@ -12,6 +15,19 @@ import {
 } from "./styles";
 
 function Success() {
+  const { address, paymentType } = useContext(OrderContext);
+
+  function getPaymentName(paymentType: PaymentType) {
+    switch (paymentType) {
+      case PaymentType.CreditCard:
+        return "Cartão de Crédito";
+      case PaymentType.DebitCard:
+        return "Cartão de Débito";
+      case PaymentType.Cash:
+        return "Dinheiro";
+    }
+  }
+
   return (
     <SuccessContainer>
       <SuccessTitleContainer>Uhu! Pedido confirmado</SuccessTitleContainer>
@@ -28,9 +44,14 @@ function Success() {
 
             <SuccessInfoContainer>
               <p>
-                Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+                Entrega em{" "}
+                <strong>
+                  {address?.street}, {address?.number}
+                </strong>
               </p>
-              <p>Farrapos - Porto Alegre, RS</p>
+              <p>
+                {address?.neighborhood} - {address?.city}, {address?.state}
+              </p>
             </SuccessInfoContainer>
           </SuccessItemContainer>
 
@@ -52,7 +73,7 @@ function Success() {
 
             <SuccessInfoContainer>
               <p>Pagamento na entrega</p>
-              <strong>Cartão de Crédito</strong>
+              {paymentType && <strong>{getPaymentName(paymentType)}</strong>}
             </SuccessInfoContainer>
           </SuccessItemContainer>
         </SuccessOrderContainer>
