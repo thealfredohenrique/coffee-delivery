@@ -4,6 +4,7 @@ export enum ActionTypes {
   ADD_ITEM_TO_CART = "ADD_ITEM_TO_CART",
   REMOVE_ITEM_FROM_CART = "REMOVE_ITEM_FROM_CART",
   CHANGE_ITEM_QUANTITY = "CHANGE_ITEM_QUANTITY",
+  CLEAR_CART = "CLEAR_CART",
 }
 
 export function addItemToCartAction(item: CartItemData) {
@@ -28,4 +29,8 @@ export function changeItemQuantityAction(itemId: string, itemQuantity: number) {
       itemQuantity,
     },
   };
+}
+
+export function clearCartAction() {
+  return { type: ActionTypes.CLEAR_CART };
 }

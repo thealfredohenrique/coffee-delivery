@@ -36,6 +36,11 @@ function cartReducer(state: CartState, action: any) {
         draft.items[itemIndex].quantity = action.payload.itemQuantity;
       });
     }
+    case ActionTypes.CLEAR_CART: {
+      return produce(state, (draft) => {
+        draft.items = [];
+      });
+    }
     default: {
       return state;
     }

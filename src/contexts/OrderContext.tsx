@@ -2,6 +2,7 @@ import { ReactNode, createContext, useReducer, useState } from "react";
 import {
   addItemToCartAction,
   changeItemQuantityAction,
+  clearCartAction,
   removeItemFromCartAction,
 } from "../reducers/cart/actions";
 import cartReducer from "../reducers/cart/reducer";
@@ -35,6 +36,7 @@ interface OrderContextData {
   addItemToCart(item: CartItemData): void;
   removeItemFromCart(itemId: string): void;
   changeItemQuantity(itemId: string, quantity: number): void;
+  clearCart(): void;
   fillAddress(address: Address): void;
   fillPaymentType(paymentType: PaymentType): void;
 }
@@ -65,6 +67,10 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
     dispatch(changeItemQuantityAction(itemId, itemQuantity));
   }
 
+  function clearCart() {
+    dispatch(clearCartAction());
+  }
+
   function fillAddress(address: Address) {
     setAddress(address);
   }
@@ -82,6 +88,7 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
         addItemToCart,
         removeItemFromCart,
         changeItemQuantity,
+        clearCart,
         fillAddress,
         fillPaymentType,
       }}

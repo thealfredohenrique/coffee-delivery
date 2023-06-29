@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { CurrencyDollar, MapPin, Timer } from "@phosphor-icons/react";
 import { OrderContext } from "../../contexts/OrderContext";
 import { PaymentType } from "../Checkout";
@@ -15,7 +16,8 @@ import {
 } from "./styles";
 
 function Success() {
-  const { address, paymentType } = useContext(OrderContext);
+  const { address, paymentType, clearCart } = useContext(OrderContext);
+  const navigate = useNavigate();
 
   function getPaymentName(paymentType: PaymentType) {
     switch (paymentType) {
@@ -27,6 +29,14 @@ function Success() {
         return "Dinheiro";
     }
   }
+
+  useEffect(() => {
+    clearCart();
+  }, []);
+
+  useEffect(() => {
+    if (!address || !paymentType) navigate("/");
+  }, [address, paymentType]);
 
   return (
     <SuccessContainer>
@@ -46,7 +56,8 @@ function Success() {
               <p>
                 Entrega em{" "}
                 <strong>
-                  {address?.street}, {address?.number}
+                  {address?.street}, {address?.number}{" "}
+                  {address?.complement && ` - ${address.complement}`}
                 </strong>
               </p>
               <p>
