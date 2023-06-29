@@ -8,7 +8,10 @@ import { FieldContainer, FieldsetContainer } from "./styles";
 import { useFormContext } from "react-hook-form";
 
 function AddressCard() {
-  const { register } = useFormContext();
+  const { register, watch } = useFormContext();
+
+  const complement = watch("address.complement");
+  const optionalIsVisible = !complement?.trim();
 
   return (
     <CardContainer>
@@ -46,7 +49,8 @@ function AddressCard() {
           type="text"
           placeholder="Complemento"
           {...register("address.complement")}
-        ></FieldContainer>
+        />
+        {optionalIsVisible && <span>Opcional</span>}
         <FieldContainer
           type="text"
           placeholder="Bairro"

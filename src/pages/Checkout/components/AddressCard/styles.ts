@@ -26,6 +26,11 @@ export const FieldsetContainer = styled.fieldset`
   input[name="address.complement"] {
     grid-row: 3;
     grid-column: 2 / span 2;
+
+    & + span {
+      grid-row: 3;
+      grid-column: 2 / span 2;
+    }
   }
 
   input[name="address.neighborhood"] {
@@ -52,6 +57,17 @@ export const FieldContainer = styled.input`
   font-size: 0.875rem;
   padding: 0.75rem;
   outline: transparent;
+
+  & + span {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    padding: 0.75rem;
+    color: ${(props) => props.theme.baseLabel};
+    font-size: 0.75rem;
+    font-style: italic;
+    pointer-events: none;
+  }
 
   &:focus {
     border-color: ${(props) => props.theme.yellowDark};

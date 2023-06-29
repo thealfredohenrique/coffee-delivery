@@ -60,7 +60,6 @@ function Checkout() {
   function handleSubmitOrder(data: OrderFormData) {
     fillAddress(data.address);
     fillPaymentType(data.paymentType);
-
     navigate("/success");
   }
 

@@ -35,8 +35,7 @@ export const SuccessOrderContainer = styled.div`
   border-radius: 4px 34px;
   position: relative;
 
-  &::before,
-  &::after {
+  &::before {
     content: "";
     position: absolute;
     top: -1px;

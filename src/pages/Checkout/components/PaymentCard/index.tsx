@@ -29,7 +29,6 @@ function PaymentCard() {
           type="radio"
           id="credit-payment-type"
           value={PaymentType.CreditCard}
-          required
           {...register("paymentType")}
         />
         <PaymentTypeOption htmlFor="credit-payment-type">
@@ -41,7 +40,6 @@ function PaymentCard() {
           type="radio"
           id="debit-payment-type"
           value={PaymentType.DebitCard}
-          required
           {...register("paymentType")}
         />
         <PaymentTypeOption htmlFor="debit-payment-type">
@@ -53,7 +51,6 @@ function PaymentCard() {
           type="radio"
           id="cash-payment-type"
           value={PaymentType.Cash}
-          required
           {...register("paymentType")}
         />
         <PaymentTypeOption htmlFor="cash-payment-type">
