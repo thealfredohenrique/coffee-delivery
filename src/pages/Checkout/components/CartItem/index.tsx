@@ -51,13 +51,13 @@ function CartItem({ coffee }: CartItemProps) {
 
         <CartItemActionsContainer>
           <CartItemCounterContainer>
-            <CounterButtonContainer onClick={handleDecrease}>
+            <CounterButtonContainer type="button" onClick={handleDecrease}>
               <Minus size={14} weight="bold" />
             </CounterButtonContainer>
 
             <span>{coffee.quantity}</span>
 
-            <CounterButtonContainer onClick={handleIncrease}>
+            <CounterButtonContainer type="button" onClick={handleIncrease}>
               <Plus size={14} weight="bold" />
             </CounterButtonContainer>
           </CartItemCounterContainer>
