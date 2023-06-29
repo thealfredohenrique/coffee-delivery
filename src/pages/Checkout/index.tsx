@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -46,12 +46,16 @@ const validationSchema = zod.object({
 type OrderFormData = zod.infer<typeof validationSchema>;
 
 function Checkout() {
-  const { fillAddress, fillPaymentType } = useContext(OrderContext);
+  const { items, fillAddress, fillPaymentType } = useContext(OrderContext);
   const orderForm = useForm<OrderFormData>({
     resolver: zodResolver(validationSchema),
   });
   const { handleSubmit } = orderForm;
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!items.length) navigate("/");
+  }, [items]);
 
   function handleSubmitOrder(data: OrderFormData) {
     fillAddress(data.address);

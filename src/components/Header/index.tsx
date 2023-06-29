@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { MapPin, ShoppingCart } from "@phosphor-icons/react";
 import { OrderContext } from "../../contexts/OrderContext";
 import logo from "../../assets/logo.svg";
@@ -13,9 +13,13 @@ import {
 } from "./styles";
 
 function Header() {
+  const location = useLocation();
   const { items } = useContext(OrderContext);
 
   const cartItemsQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
+
+  const linkTo =
+    !items.length || location.pathname === "/checkout" ? "/" : "/checkout";
 
   return (
     <HeaderContainer>
@@ -26,7 +30,7 @@ function Header() {
             <MapPin size={22} weight="fill" />
             Porto Alegre, RS
           </LocationContainer>
-          <NavLink to="/checkout">
+          <NavLink to={linkTo}>
             <CartContainer>
               <ShoppingCart size={22} weight="fill" />
               {items.length > 0 && (
