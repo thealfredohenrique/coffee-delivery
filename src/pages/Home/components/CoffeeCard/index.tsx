@@ -48,7 +48,7 @@ function CoffeeCard({ coffee }: CoffeeCardProps) {
     <CoffeeCardContainer>
       <CoffeeFigureContainer>
         <CoffeeImageContainer
-          src={`/src/assets/${coffee.image}`}
+          src={`/coffee-delivery/images/${coffee.image}`}
           alt={coffee.name}
         />
 

@@ -55,7 +55,7 @@ function Intro() {
         </LeftContainer>
 
         <RightContainer>
-          <img src="/src/assets/coffee-image.png" />
+          <img src="/coffee-delivery/images/coffee-image.png" />
         </RightContainer>
       </ContentWrapper>
     </IntroContainer>

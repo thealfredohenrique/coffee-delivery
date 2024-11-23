@@ -39,7 +39,7 @@ function CartItem({ coffee }: CartItemProps) {
   return (
     <CartItemContainer>
       <CartItemImageContainer
-        src={`/src/assets/${coffee.image}`}
+        src={`/coffee-delivery/images/${coffee.image}`}
         alt={coffee.name}
       />
 
